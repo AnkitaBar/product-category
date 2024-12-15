@@ -228,7 +228,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 
 const AllProduct : React.FC = () => {
   const { data: allProductsData, isPending: allProductsPending } = allProductQuery();
@@ -238,6 +238,9 @@ const AllProduct : React.FC = () => {
   const { data: searchedData, isPending: searchedDataPending, refetch: refetchSearchedData } = useSearchedProductQuery(query.search as string);
 
   const {data:categoryFilteredData, isPending:categoryFilterPEnding} = productByCategoryQuery(query.category as string);
+  useEffect(()=>{
+    console.log(allProductsData)
+  },[allProductsData])
   if (allProductsPending || allCategoriesPending) {
     return <p>Loading Products...</p>;
   }
@@ -546,7 +549,7 @@ const AllProduct : React.FC = () => {
                   : <p>No Products available</p>
               ) : (
                 Array.isArray(categoryFilteredData?.products) && categoryFilteredData?.products?.length > 0
-                  ? categoryFilteredData.products.map((item: allProductsProps) => (
+                  ? categoryFilteredData?.products.map((item: allProductsProps) => (
                       <Grid item xs={12} sm={6} md={4} key={item.id}>
                         <Card
                           sx={{

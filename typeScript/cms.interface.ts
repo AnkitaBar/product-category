@@ -19,6 +19,7 @@ interface Dimensions {
     qrCode: string;
   }
 export interface IallProductProps {
+  products:any;
     id: number;
     title: string;
     description: string;
@@ -44,7 +45,8 @@ export interface IallProductProps {
   }
   
   export interface allProductsProps extends IallProductProps {
-    products: IallProductProps;
+    // products: [IallProductProps];
+    products:any
   }
   ////////////////// details
   export interface productdDetailsProps extends IallProductProps {
